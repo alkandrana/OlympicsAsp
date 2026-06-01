@@ -1,0 +1,6 @@
+@OlympicsAsp_HostAddress = http://localhost:5203
+
+GET {{OlympicsAsp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
