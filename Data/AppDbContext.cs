@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OlympicsAsp.Models;
 
 namespace OlympicsAsp;
 
@@ -8,4 +9,5 @@ public class AppDbContext : DbContext
         : base(options) { }
 
     public DbSet<Goal> Goals => Set<Goal>();
+    public DbSet<Session> Sessions => Set<Session>();
 }

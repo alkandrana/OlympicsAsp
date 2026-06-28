@@ -22,6 +22,14 @@ namespace OlympicsAsp.Controllers
             return Ok(goals);
         }
 
+        [HttpGet]
+        [Route("/goals/name/{name}")]
+        public async Task<IActionResult> GetGoalByName(string name)
+        {
+            List<Goal> goals = await _ctx.Goals.Where(g => g.Name.Contains(name)).ToListAsync();
+            return Ok(goals);
+        }
+
         // GET api/<GoalController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOneGoal(int id)
