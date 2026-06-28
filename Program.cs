@@ -1,8 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using OlympicsAsp.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace OlympicsAsp
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
+            // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+            );
+            builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
@@ -15,7 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+            var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -31,4 +42,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+            app.Run();
+        }
+    }
+}
