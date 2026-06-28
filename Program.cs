@@ -7,20 +7,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
 );
-builder.Services.AddOpenApi();
+// builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-// builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpointsApiExplorer();
 
-// builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // app.UseSwagger();
+    app.UseSwagger();
     app.UseSwaggerUI();
     // app.MapOpenApi();
 }
