@@ -8,6 +8,13 @@ namespace OlympicsAsp
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigins", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader();
+                });
+            });
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
@@ -26,6 +33,8 @@ namespace OlympicsAsp
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseCors("AllowSpecificOrigins");
 
             app.UseAuthorization();
 

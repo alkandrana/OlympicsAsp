@@ -6,5 +6,6 @@ public class Goal
     public string Name { get; set; } = "";
     public DateOnly StartDate { get; set; } = DateOnly.FromDateTime(DateTime.Today);
     public DateOnly Deadline { get; set; } = DateOnly.FromDateTime(DateTime.Today.AddDays(30));
+    public string? Project { get; set; }
     public int Target { get; set; }
 }
